@@ -1,0 +1,13 @@
+parseable: true
+quiet: false
+rulesdir:
+  - ./rules
+skip_list:
+  - '304' # [E304] Environment variables don't work as part of command
+  - '401' # [E401] Git checkouts must contain explicit version
+  - '403' # [E403] Package installs should not use latest
+  - '503' # [E503] Tasks that run when changed should likely be handlers
+  - '701' # [E701] No 'galaxy_info' found
+  - skip_this_tag
+use_default_rules: true
+verbosity: 1

@@ -1,0 +1,5 @@
+---
+- name: pacman -Syu を実行してシステムを最新化する
+  pacman:
+    update_cache: yes
+    upgrade: yes

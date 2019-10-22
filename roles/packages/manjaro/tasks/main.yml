@@ -1,0 +1,41 @@
+---
+- name: 公式repositoryからパッケージをインストール
+  pacman:
+    name: "{{ present_packages }}"
+    state: present
+  vars:
+    present_packages:
+      - which
+      - sudo
+      - git
+      - tree
+      - zsh
+      - emacs
+      - tmux
+      - xsel
+      - base-devel
+      - yay
+
+- name: AURパッケージのインストールはrootでは出来ないため専用のユーザを作成する
+  user:
+    name: aur_builder
+    group: wheel
+
+- name: aur_builderユーザがsudoを使えるようにする
+  lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    create: yes
+    validate: 'visudo -cf %s'
+
+- name: yayを使ってAURのrepositoryからパッケージをインストール
+  tags:
+  - skip_ansible_lint
+  aur:
+    name: "{{ packages }}"
+  become: yes
+  become_user: aur_builder
+  vars:
+    packages:
+      - peco
+      - cask

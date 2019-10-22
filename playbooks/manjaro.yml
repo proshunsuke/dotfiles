@@ -1,0 +1,5 @@
+---
+- hosts: manjaro
+  roles:
+    - upgrade/manjaro
+    - packages/manjaro
