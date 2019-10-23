@@ -1,2 +1,25 @@
 ---
+- name: emacs.d/themesディレクトリの作成
+  file:
+    path: ~/.emacs.d/themes
+    state: directory
 
+- name: themeファイルの配置
+  copy:
+    src: files/home/user/.emacs.d/themes/Darkula-theme.el
+    dest: ~/.emacs.d/themes
+
+- name: Caskファイルの配置
+  copy:
+    src: files/home/user/.emacs.d/Cask
+    dest: ~/.emacs.d
+
+- name: init.elファイルの配置
+  copy:
+    src: files/home/user/.emacs.d/init.el
+    dest: ~/.emacs.d
+
+- name: caskの実行
+  shell: cask install
+  args:
+    chdir: ~/.emacs.d

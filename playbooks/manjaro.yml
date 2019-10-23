@@ -3,3 +3,4 @@
   roles:
     - upgrade/manjaro
     - packages/manjaro
+    - emacs
