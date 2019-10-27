@@ -1,0 +1,22 @@
+---
+- name: localeの設定をする
+  shell: localedef -i ja_JP -f UTF-8 ja_JP.utf8
+
+- name: .zshrcの作成
+  template:
+    src: templates/home/user/.zshrc.j2
+    dest: ~/.zshrc
+
+- name: 現在のシェルをチェック
+  shell: echo $SHELL
+  register: current_shell
+
+- name: 現在のシェルを出力
+  debug: var=current_shell.stdout
+
+- name: .zshrcの設定を反映する
+  shell: /bin/zsh -lc "source ~/.zshrc"
+  when: current_shell.stdout == "/bin/zsh"
+
+- name: デフォルトのshellをzshにする
+  command: chsh -s /bin/zsh

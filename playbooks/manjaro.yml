@@ -1,6 +1,9 @@
 ---
 - hosts: manjaro
+  vars_files:
+    - ../hosts/manjaro/vars/all.yml
   roles:
     - upgrade/manjaro
     - packages/manjaro
     - emacs
+    - zsh

@@ -9,6 +9,7 @@
       - sudo
       - git
       - tree
+      - glibc
       - zsh
       - emacs
       - tmux
